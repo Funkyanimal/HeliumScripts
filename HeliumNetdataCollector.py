@@ -25,7 +25,7 @@ CHARTS = {
 }
 
 class Service(UrlService):    
-    def __init__(self, scheme="http", host="localhost", port=4467, logging=True):
+    def __init__(self, name = None, scheme="http", host="localhost", port=4467, logging=True):
         UrlService.__init__(self, configuration=configuration, name=name)
         self.url = f'{scheme}://{host}:{port}/jsonrpc'
         self.client = HTTPClient(self.url, basic_logging=logging)
@@ -47,6 +47,8 @@ class Service(UrlService):
     def block_height(self):
         return self.http_post("block_height")["height"]
 
+    def logMe(self,msg):
+	self.debug(msg)  
 
     def _get_data(self):
         #The data dict is basically all the values to be represented
