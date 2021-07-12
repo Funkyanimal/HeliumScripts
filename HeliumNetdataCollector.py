@@ -16,10 +16,10 @@ ORDER = [
 ]
 
 CHARTS = {
-    "block_height": {
-         "options": ["Block_Height", "Blocks", "blocks", "Validator", None, "line"]
+    "block_height_chart": {
+        'options': ["Block_Height", "blocks", "blocks", "Validator", "Current_Block_Height", "line"],
         "lines": [
-            ["block_height", "block"]
+            ["block_height","block"]
         ]
      }
 }
@@ -45,12 +45,13 @@ class Service(UrlService):
             logging.error("id: %s method: '%s' message: %s", ex.response.id, method, ex.response.message
             
     def block_height(self):
-        return self.http_post("block_height")["height"]
+	height = self.http_post("block_height")["height"]		  
+        return height
 
     def logMe(self,msg):
 	self.debug(msg)  
 
-    def get_data(self):
+    def _get_data(self):
         #The data dict is basically all the values to be represented
         # The entries are in the format: { "dimension": value}
         data = dict()
