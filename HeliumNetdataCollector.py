@@ -1,10 +1,10 @@
 from bases.FrameworkServices.UrlService import UrlService
-import logging
 from jsonrpcclient.clients.http_client import HTTPClient
 from jsonrpcclient.exceptions import ReceivedErrorResponseError
 from jsonrpcclient.requests import Request
 
-logger = logging.getLogger(__name__)
+
+
 	
 
 NETDATA_UPDATE_EVERY=1
@@ -24,25 +24,13 @@ CHARTS = {
      }
 }
 
-class Service(UrlService):    
-    def __init__(self, name = None, scheme="http", host="localhost", port=4467, logging=True):
+class Service(UrlService):
+    def __init__(self, scheme="http", host="localhost", port=4467, configuration=None, name=None):
         UrlService.__init__(self, configuration=configuration, name=name)
-        self.url = f'{scheme}://{host}:{port}/jsonrpc'
-        self.client = HTTPClient(self.url, basic_logging=logging)
         self.order = ORDER
-        self.definitions = CHARTS #values to show in graphs
-
-    def http_post(self, method, **kwargs):
-        try:
-          if not kwargs:              
-            response = self.client.send(Request(method))
-          else:
-            response = self.client.send(Request(method, **kwargs))
-
-          return response.data.result
-
-        except ReceivedErrorResponseError as ex:
-            logging.error("id: %s method: '%s' message: %s", ex.response.id, method, ex.response.message
+        self.definitions = CHARTS
+        self.url = f'{scheme}://{host}:{port}/jsonrpc'
+       
             
     def block_height(self):
 	height = self.http_post("block_height")["height"]		  
@@ -52,11 +40,19 @@ class Service(UrlService):
 	self.debug(msg)  
 
     def _get_data(self):
-        #The data dict is basically all the values to be represented
-        # The entries are in the format: { "dimension": value}
         data = dict()
-                          
-        data['block_height'] = self.block_height()
+
+        validatorstats = self.get_validator_stats()
+        if not validatorstats:
+            return None
+
+        data.update(validatorstats)
+	
+    def get_validator_stats
+	url = '{0}{1}'.format(self.url, '[blo
+	raw = self._get_raw_data(url)
+	
+        data = dict()
             
         return data
 
