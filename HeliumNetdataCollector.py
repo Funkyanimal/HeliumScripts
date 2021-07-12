@@ -50,7 +50,7 @@ class Service(UrlService):
     def logMe(self,msg):
 	self.debug(msg)  
 
-    def _get_data(self):
+    def get_data(self):
         #The data dict is basically all the values to be represented
         # The entries are in the format: { "dimension": value}
         data = dict()
