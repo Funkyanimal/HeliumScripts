@@ -11,45 +11,26 @@ ORDER = [
 
 CHARTS = {
     'blockheight': {
-        'options': [None, 'Validator Height', 'count', 'blockheight', 'miner_blockheight', 'area'],
+        'options': [None, 'Validator Height', 'count', 'miner', 'miner_blockheight', 'area'],
         'lines': [
-            ['blockchain_blocks', 'blocks', 'absolute'],
-            ['blockchain_headers', 'headers', 'absolute'],
+            ['block_height', 'height', 'absolute'],
         ]
     },
     'blockage': {
-        'options': [None, 'Blockchain Difficulty', 'difficulty', 'blockchain', 'energi.difficulty', 'line'],
+        'options': [None, 'Block Age', 'age', 'miner', 'miner_blockage', 'line'],
         'lines': [
-            ['blockchain_difficulty', 'Diff', 'absolute'],
+            ['block_age', 'age', 'absolute'],
         ],
     },
     
 }
 
 METHODS = {
-    'getblockheightinfo': lambda r: {
-        'blockchain_blocks': r['blocks'],
-        'blockchain_headers': r['headers'],
-        'blockchain_difficulty': r['difficulty'],
+    'getblockheight': lambda r: {
+        'block_height': r['height'],
     },
-    'getmempoolinfo': lambda r: {
-        'mempool_txcount': r['size'],
-        'mempool_txsize': r['bytes'],
-        'mempool_current': r['usage'],
-        'mempool_max': r['maxmempool'],
-    },
-    'getmemoryinfo': lambda r: dict([
-        ('secmem_' + k, v) for (k, v) in r['locked'].items()
-    ]),
-    'getnetworkinfo': lambda r: {
-        'network_timeoffset': r['timeoffset'],
-        'network_connections': r['connections'],
-    },
-    'gettxoutsetinfo': lambda r: {
-        'utxo_count': r['txouts'],
-        'utxo_xfers': r['transactions'],
-        'utxo_size': r['disk_size'],
-        'utxo_amount': r['total_amount'],
+    'getblockage': lambda r: {
+        'info_block_age': r['block_age'],
     },
 }
 
