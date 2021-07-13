@@ -44,7 +44,7 @@ class Service(UrlService):
         self.definitions = CHARTS
         self.host = self.configuration.get('host', '127.0.0.1')
         self.port = self.configuration.get('port', 4467)
-        self.url = '{scheme}://{host}:{port}/jsonrpc'.format(
+        self.url = '{scheme}://{host}:{port}'.format(
             scheme=self.configuration.get('scheme', 'http'),
             host=self.host,
             port=self.port,
