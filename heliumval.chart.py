@@ -29,11 +29,11 @@ CHARTS = {
 }
 
 METHODS = {
-    'getblockheight': lambda r: {
-        'block_height': r['height'],
+    'block_height': lambda r: {
+        'height'
     },
-    'getblockage': lambda r: {
-        'info_block_age': r['block_age'],
+    'info_block_age': lambda r: {
+        'info_block_age'
     },
 }
 
