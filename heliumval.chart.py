@@ -81,7 +81,7 @@ class Service(UrlService):
         if not result:
             return None
 
-        result = json.dumps(result)
+        result = json.loads(result)
         data = dict()
 
         for i, (_, handler) in enumerate(METHODS.items()):
