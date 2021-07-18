@@ -70,7 +70,7 @@ class Service(UrlService):
 
         for i, method in enumerate(METHODS):
             batch.append({
-                'version': JSON_RPC_VERSION,
+                'jsonrpc': JSON_RPC_VERSION,
                 'id': i,
                 'method': method,
                 'params': [],
