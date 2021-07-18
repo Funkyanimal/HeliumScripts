@@ -30,10 +30,10 @@ CHARTS = {
 
 METHODS = {
     'block_height': lambda r: {
-        'height'
+        'block_height': r['height'],
     },
     'info_block_age': lambda r: {
-        'info_block_age'
+        'info_block_age': r['block_height'],
     },
 }
 
