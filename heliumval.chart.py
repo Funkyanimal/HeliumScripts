@@ -14,15 +14,15 @@ ORDER = [
 
 CHARTS = {
     'blockheight': {
-        'options': [None, 'Validator Height', 'count', 'miner', 'miner_blockheight', 'area'],
+        'options': [None, 'Validator Height', 'count', 'miner', 'miner_block_height', 'area'],
         'lines': [
             ['block_height', 'height', 'absolute'],
         ]
     },
     'blockage': {
-        'options': [None, 'Block Age', 'age', 'miner', 'miner_blockage', 'line'],
+        'options': [None, 'Block Age', 'age', 'miner', 'miner_block_age', 'line'],
         'lines': [
-            ['block_age', 'age', 'absolute'],
+            ['block_age', 'block_age', 'absolute'],
         ],
     },
     
@@ -33,7 +33,7 @@ METHODS = {
         'block_height': r['height'],
     },
     'info_block_age': lambda r: {
-        'info_block_age': r['block_height'],
+        'info_block_age': r['block_age'],
     },
 }
 
@@ -81,7 +81,7 @@ class Service(UrlService):
         if not result:
             return None
 
-        result = json.loads(result.decode('utf-8'))
+        result = json.dumps(result)
         data = dict()
 
         for i, (_, handler) in enumerate(METHODS.items()):
