@@ -16,7 +16,7 @@ CHARTS = {
     'blockheight': {
         'options': [None, 'Validator Height', 'count', 'miner', 'miner_block_height', 'area'],
         'lines': [
-            ['block_height', 'height', 'absolute'],
+            ['height', 'height', 'absolute'],
         ]
     },
     'blockage': {
